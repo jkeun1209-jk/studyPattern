@@ -1,0 +1,158 @@
+﻿AS-IS PGM,AS-IS PGM명,Depth,AS-IS PGM 함수,AS-IS PGM 함수명,설명,"호출구분
+(PR:접수, CO:개통)","구분1
+(고객유형)","구분2
+(서비스상세)","구분3
+(단말유형)","구분4
+(기타)",L4,L4의 기능
+ORDSS0100010T02,신규가입 서비스 임시정보 생성,-1,b100_get_esim_eqp_info,eSIM단말구분 조회,"zeqp_eqp_mdl_s0069
+Watch단말 가입은 2nd Device가입화면에서 진행하세요",PR,,,eSIM,휴일포함,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS0100010T02,신규가입 서비스 임시정보 생성,-1,c010_chk_scrbrst,영업장/화면별 가입제한 여부,"zngm_it_isol_scrn_lst_s0003
+선후불전환가입 제외",PR,,,,휴일포함,BP-ORDTMFC002-0043-R017,신규가입 업무 제한 체크
+ORDSS0100010T02,신규가입 서비스 임시정보 생성,-1,c100_zord_rsp_svc_dtl_brws,esim단말일 경우 RSP연동방식 조회,"이동전화eSIM단말가입시 RSP연동정보조회
+zord_rsp_svc_dtl_s0010",PR,,,eSIM,휴일제외,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS01S0200T02,"부가회선(M2M,Cat.M1) 임시정보 생성",-1,b100_get_esim_eqp_info,eSIM단말구분 조회,"zeqp_eqp_mdl_s0069
+Watch단말 가입은 2nd Device가입화면에서 진행하세요",PR,,,eSIM,휴일포함,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS01S0200T02,"부가회선(M2M,Cat.M1) 임시정보 생성",-1,c100_zord_rsp_svc_dtl_brws,esim단말일 경우 RSP연동방식 조회,"이동전화eSIM단말가입시 RSP연동정보조회
+zord_rsp_svc_dtl_s0010",PR,,,eSIM,휴일제외,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS01S0210T02,Cat.M1 임시정보 생성,-1,X,,zordms0100015 모듈 호출전 체크사항 없음.,PR,,,,,X,
+ORDSS01S0220T02,2nd Device 임시정보 생성,-1,b100_get_esim_eqp_info,eSIM단말구분 조회,"zeqp_eqp_mdl_s0069
+Watch단말 가입은 2nd Device가입화면에서 진행하세요",PR,,,eSIM,휴일포함,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS01S0220T02,2nd Device 임시정보 생성,-1,c100_zord_rsp_svc_dtl_brws,esim단말일 경우 RSP연동방식 조회,"이동전화eSIM단말가입시 RSP연동정보조회
+zord_rsp_svc_dtl_s0010",PR,,,eSIM,휴일제외,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ORDSS0100010T12,IoT-Gate Cat.M1 신규가입 처리(선납),-1,X,,"(선처리)
+- 번호 자동채번
+- 고객 연락처 변경
+- 청구계정 생성(자납신청포함)
+
+zordms0100015 INPUT을 채우기 위한 조회기능
+- 고객번호로 주민법인일련번호 조회
+- 단말기모델명, USIM모델명, 상품명조회
+- IMEI번호 조회 등
+
+(후처리)
+- Cat.M1 셀프가입 카드승인요청(zpaympmt00400)",PR,,,,,X,
+ORDSS0100010T13,IoT-Gate Cat.M1/M2M 신규가입 처리(후불),-1,X,,"(선처리)
+- 단말기정보로 Cat.M1/M2M 구분 (서비스상세구분)
+- 번호 자동채번
+- 고객 연락처 변경
+- 청구계정 생성(자납신청포함)
+
+zordms0100015 INPUT을 채우기 위한 조회기능
+- 고객번호로 주민법인일련번호 조회
+- 단말기모델명, USIM모델명, 상품명조회
+- IMEI번호 조회 등",PR,,,,,X,
+ZORDBS01S0021,공통플랫폼 데이터 임시정보 생성 및 개통 onDemand Batch,-1,X,,미사용 프로그램,PR,,,,,X,
+ZORDBS01S0037,다회선가입 법인고객 임시정보생성 onDemand Batch,-1,s03_cursor_fetch,,"zeqp_eqp_mdl_s0069
+Watch단말 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDBS01S0037,다회선가입 법인고객 임시정보생성 onDemand Batch,-1,s03_zord_rsp_svc_dtl_brws,eSIM단말 RSP연동조회,zord_rsp_svc_dtl_s0010,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDBS01S0038,다회선가입 법인고객 개통처리 onDemand Batch,-1,s03_cursor_fetch,,"zeqp_eqp_mdl_s0069
+Watch단말 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDBS01S0038,다회선가입 법인고객 개통처리 onDemand Batch,-1,s03_zord_rsp_svc_dtl_brws,eSIM단말 RSP연동조회,zord_rsp_svc_dtl_s0010,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMCAR00030,차량용 개통처리 공통모듈,-1,b100_rsp_lnkg_hst_proc,RSP연동이력조회,zord_rsp_svc_dtl_s0033,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMCAR00030,차량용 개통처리 공통모듈,-1,c100_mo_get_cust_info,모서비스-고객정보 조회,"zord_wless_svc_s0005 모서비스 조회
+zordms0100010 고객공통사항체크
+- 고객정보X, 이중고객일 경우 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100060,애플워치개통처리,-1,b100_rsp_lnkg_hst_proc,RSP연동이력조회,zord_rsp_svc_dtl_s0033,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100060,애플워치개통처리,-1,c100_mo_get_cust_info,모서비스-고객정보 조회,"zord_wless_svc_s0005 모서비스 조회
+zordms0100010 고객공통사항체크
+- 고객정보X, 이중고객일 경우 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100070,갤럭시워치개통처리,-1,b100_rsp_lnkg_hst_proc,RSP연동이력조회,zord_rsp_svc_dtl_s0033,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100070,갤럭시워치개통처리,-1,c100_mo_get_cust_info,모서비스-고객정보 조회,"zord_wless_svc_s0005 모서비스 조회
+zordms0100010 고객공통사항체크
+- 고객정보X, 이중고객일 경우 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100077,이동전화eSIM개통처리,-1,b100_rsp_lnkg_hst_proc,RSP연동이력조회,zord_rsp_svc_dtl_s0033,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100077,이동전화eSIM개통처리,-1,c110_ch_get_cust_info,자서비스-고객정보 조회,"zord_co_cust_s0079 가입고객정보 조회
+zordms0100010 고객공통사항체크
+- 고객정보X, 이중고객일 경우 가입불가",PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b001_scrb_psbl_chnl_chk,Usim 인 경우 특정 채널 가입불가 체크,"5/5~ USIM 신규 개통 업무 제한
+ZORD_P_USIM_CHNL_CHK_NEW
+철회재가입,해지오처리재가입은 제외",,,,,휴일포함,BP-ORDTMFC002-0043-R017,신규가입 업무 제한 체크
+ZORDMSUB01080,신규가입 esim 조회,1,b110_get_esim_eqp,esim 단말여부 확인,zeqp_eqp_mdl_s0069,PR/CO,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01080,신규가입 esim 조회,1,b111_get_rsp_lnkg_mthd,RSP연동방식 조회,zord_rsp_svc_dtl_s0010,PR,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01080,신규가입 esim 조회,1,b130_get_svc_mgm_num,eSIM 번호자원예약(서비스관리번호) 조회,"AW 비대면 번호예약건은 서비스관리번호 조회
+# [접수] 이동",PR,,,eSIM,,X,
+ZORDMSUB01080,신규가입 esim 조회,1,b210_get_mother_svc_num,모회선번호조회,call forking 방식일 경우 모회선관리번호 조회,CO,,,eSIM,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,"b020_get_eqp_suprt_info
+b103_get_zord_astm_allot_dc_dtl_tmp","할부/보조금정보 조회
+할부/보조금 팝업시 생성된 정보",# [단말구매] 로 이동,,,,,,X,
+ZORDMSUB01070,신규가입 렌탈 조회,1,X,,,,,,,,X,
+ZORDMSUB01110,신규가입 Cat. M1 조회/처리,1,b110_get_cat_pay_yn,Cat.M1 여부 조회,"선납 여부
+Cat.M1 셀프개통여부 조회
+zord_prod_grp_dtl_s0049
+# [접수] 이동",PR/CO,,Cat.M1(C9),,,X,
+ZORDMSUB01110,신규가입 Cat. M1 조회/처리,1,b210_get_mgmt_org_id,Cat.M1 단말관리조직 조회,"zngm_org_s0177
+# [개통] 이동",CO,,Cat.M1(C9),,,X,
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b300_call_zordmesn00010,가상단말기 일련번호 자동채번,"ZORD_P_USIMSCRB_EQP
+zeqp_eqp_mdl_s0023",PR,,,USIM,USIM단독개통,BP-ORDTMFC002-0043-R019,신규가입 USIM 체크
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,"b010_decrypt_cust_info
+b110_get_bas_info(USIM단독체크 제외)","고객정보 복호화
+고객공통정보 조회","zordms0100010
+# 외국인 자체할부여부 등 할부관련 로직은 [단말구매]로 이동",PR,,,,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b301_chk_sale_chnl,신청정보 판매채널 필수 체크,"ZORD_P_SALE_CHNL_NOT_SVC_TYP, ZORD_P_SALE_CHNL_BR_TYP",PR,,,,,BP-ORDTMFC002-0043-R015,신규가입 영업정책 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b302_chk_5g_usim_indpnd,5G 유심단독 개통가능여부 체크,,PR,,,USIM,USIM단독개통,BP-ORDTMFC002-0043-R019,신규가입 USIM 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b303_chk_rsv_only_eqp,예약 only 단말기 체크,zord_agn_svc_scrb_rsv_eqp_s0006,PR,,,,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b305_chk_frgnr,체류코드 E92 일 경우 PPS만 가입가능,,PR,일반외국인(M0),선불(C2),,,BP-ORDTMFC002-0043-R021,신규가입 선불 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b306_chk_pps_mandatory,PPS가입시 외국인 국적 필수 체크,,PR,외국인(M),선불(C2),,,BP-ORDTMFC002-0043-R021,신규가입 선불 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b307_chk_biz_num,사업자번호 유효성 체크,"명의자의 사업자번호가 맞는지 체크
+zord_cust_rel_hst_s0046",PR,,,,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b308_chk_roaming,로밍 체크,"로밍 USIM단독,  MDN번호대역 체크(20)
+zrommcom70400",PR,,국제로밍(C4),,,BP-ORDTMFC002-0043-R022,신규가입 로밍 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b309_chk_010_idnt_num,010 국번 체크,미사용 로직 확인,PR,,,,,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b310_chk_pps_data_prod_yn,선후불전환가입시 PPS데이터충전요금제가입불가,선후불전환체크와 중복으로 삭제,PR,,,,선후불전환가입,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b311_chk_pps_data_scrb_yn,이용종류가 PPS일 경우만 단말기 기준 PPS데이터상품 가입 가능여부 체크,zord_prod_grp_dtl_s0311,PR,,선불(C2),,,BP-ORDTMFC002-0043-R021,신규가입 선불 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b312_chk_ikids,4세미만의 경우 아이키즈 단말만 가입가능 체크,,PR,,,,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b314_chk_dpstr,일반외국인 명의자와 예금주 동일여부 체크,"자동납부및 명의자 예금주 동일인 여부 체크대상 관리(일반외국인 자납필수(청구정보에서 체크)이며 명의자와 예금주 동일여부 체크)
+NOVA CallActivity로 처리되어야 할지?",PR,,"일반(C1, 특수/사업용 제외)",,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b315_chk_svc_type_yn,사용중인서비스의 이용종류체크,"zord_svc_s0569
+일반이아닌 이용종류로 사용중인 IMEI가 존재, 
+사업용이아닌 이용종류로 사용중인 IMEI가 존재할 경우 가입 불가처리",PR,,"이용종류(01, 05)",,단말,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b316_chk_corp_grtm_scrb,법인/공공기관 대상 이동전화 보증금 가입가능 체크,zordms0100150,PR,법인/공공기관,선불(C2) 제외,,,BP-ORDTMFC002-0043-R023,신규가입 회선제한 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b317_chk_gold_num,골드번호조회,"골드번호로 air회선 신규가입 사용불가
+zord_3g_prfer_num_rsv",,,air(CB),,"신규가입(1), 번호",BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b401_chk_scrbrst,영업장/화면별 가입제한 체크,"zngm_it_isol_scrn_lst_s0003
+배치, 선후불전환가입 제외",PR,,,,,BP-ORDTMFC002-0043-R017,신규가입 업무 제한 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b407_call_zordmcus00720,KAIT부정가입방지 이력생성,# [개통] 으로 이동,CO,,,,,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b101_chk_iot_outprc,특정조직에서 발급한 영업승인번호일 경우 출고가 미등록 IoT 단말의 개통 제한,"영업승인번호 발행 조직 조회 zprm_pr_mny_plcy_sale_aprv_s0012
+ZORD_P_IOT_OUTPRC_CHK_ORG ",PR,,,,"영업승인번호 + 단말, 
+다회선가입(2)제외",BP-ORDTMFC002-0043-R015,신규가입 영업정책 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b100_chk_usim_lpay,USIM후불신청 가능 이용종류 체크,ZORD_P_USIM_LPAY_UN_SVC_TYP,PR,,,USIM,,BP-ORDTMFC002-0043-R019,신규가입 USIM 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b110_chk_pafscrb_psbl,선후불전환가입가능여부 체크,"zordms0100034
+# [선후불전환가입 체크] 이동",PR,,,,선후불전환가입,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b120_chk_unlaw_spamer_yn,불법스패머 회선제한 체크,ZORDMS0100039 ,PR,개인/법인,"일반(C1, 특수/사업용 제외), 선불(C2)",,철회후재가입(4)제외,BP-ORDTMFC002-0043-R025,불법스패머 가입제한
+ZORDMSUB01020,신규가입 공통 체크,1,b131_chk_custyp_scrbln_rst_plcy,가입 회선제한 체크,zordms0100029,PR,,"일반(C1, 특수/사업용 제외), 선불(C2)",,,BP-ORDTMFC002-0043-R023,신규가입 회선제한 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b140_chk_tablet_scrb_psbl,개인 태블릿PC및 웨어러블단말 할부회선수제한 체크,"개인, 일반, 철회후재가입 포함
+zordms0100099",PR,개인,"일반(C1, 특수/ 제외)",,철회후재가입(4) 포함,BP-ORDTMFC002-0043-R023,신규가입 회선제한 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b150_chk_grtm,보증금 체크,"Rule 테이블에서 고객유형,법인상장구분 코드에 따른 보증금 체크 zord_chg_cd_op_s0002
+zordmcom10050 고객별 보증보험/보증금면제 회선수 체크
+법인/공공기관 신용등급결과 가입가능회선수가 없을 경우 보증금 면제를 선택한 경우 승인후 가입가능",PR,,"일반(C1, 특수이용종류 제외)",,,BP-ORDTMFC002-0043-R023,신규가입 회선제한 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b160_chk_eqp,단말체크,"KAIT동일명의 체크 대상
+zordms0500011, zordms05s0050(CO), zordms05s0081(CO)",PR/CO,,,,,BP-ORDTMFC002-0043-R018,신규가입 단말 체크
+ZORDMSUB01020,신규가입 공통 체크,1,"b170_chk_np_psbl
+b171_chk_np","번호이동(3),14일이내철회후재가입(4),오처리해지후재가입(5)  체크 ","zordms1200006
+# 사전체크 중복으로 제외",PR/CO,,,,,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b180_chk_kait_brws_rslt,타사미납결과조회,"철회후재가입 제외
+zordmcus00031
+# 사전체크 중복으로 제외",PR/CO,,,,,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b190_chk_wlf_dc,복지할인조회,zordms0800070,PR/CO,,일반(C1),,,BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b404_chk_usim_reuse_yn,USIM카드 재사용여부 조회,"zeqp_eqp_orgl_book_s0057
+이력용",CO,,,,,BP-ORDTMFC002-0043-R019,신규가입 USIM 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b405_chk_insu_interface,보증보험I/F 처리결과확인,zordmcom10041,CO,,,,,BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크
+ZORDMSUB01020,신규가입 공통 체크,1,b310_chk_pps_data_prod_yn,pps충전데이터 요금제 가입불가,"zord_prod_grp_dtl_s0310
+# [선후불전환가입 체크] 이동",CO,,,,선후불전환가입,X,
+ZORDMSUB01020,신규가입 공통 체크,1,b312_chk_ikids,4세미만 요금제 체크,"zordmutl00010
+4세 미만 고객은 아이키즈 단말기만 가입가능",CO,개인(여권번호제외),"일반(C1),선불(C2)",,,BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크
+ZORDMSUB01040,신규가입 권한 체크,1,b100_chk_svc_auth,가입권한체크,zngmmdet00010 zngmmcap00020,PR/CO,,,,,BP-ORDTMFC002-0043-R014,신규가입 권한체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b110_chk_prepay_join,선불업무 가능시간 체크,zordms1220100,PR/CO,,선불(C2),,,BP-ORDTMFC002-0043-R021,신규가입 선불 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b120_chk_legal_repve,법정대리인 연결정보 조회,zord_cust_rel_hst_s0010,PR/CO,,,,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b130_chk_married_teen,성혼한 미성년자 조회,,PR/CO,개인(여권번호제외),"일반(C1),선불(C2)",,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b140_chk_iansi_eqp,안심폰여부 체크,미사용 로직,,,,,,X,
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b230_chk_ca_info_phb,해지고객정보보안을 신청한 고객 - 안내성,ngmf_ca_info_phb_chk ,CO,,,,,BP-ORDTMFC002-0043-R016,신규가입 고객 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b150_chk_apply_svc_num,가용서비스번호 체크,zordms0500010,PR/CO,,,,"신규가입(1), 다회선가입(2)",BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크
+ZORDMS0100020,중고폰개통 회선제한 관리,2,b170_chk_old_eqp_cnt,중고폰개통 회선제한 관리,,PR/CO,,,,,BP-ORDTMFC002-0043-R024,중고폰개통 회선제한 관리
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b180_chk_apply_usim_mdl,USIM카드가용여부체크,,PR/CO,,,,,BP-ORDTMFC002-0043-R019,신규가입 USIM 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b190_chk_scrb_rst,가입제한 체크,,PR/CO,,,,,BP-ORDTMFC002-0043-R023,신규가입 회선제한 체크
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b200_chk_insu_qualif,"보험적격여부 체크, 할부한도 체크",# [단말구매] 로 이동,PR/CO,,,,,X,
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b210_chk_cust_mtr,고객확인사항,"zordms0100012 (가입제한, 자사미납, … 사전체크와 중복)
+# 사전체크 중복으로 제외",,,,,,X,
+ZORDMSUB01030,신규가입 공통 체크 (2TR일 경우),1,b220_chk_sale_aprv_num,영업승인번호 체크,ZPSCMCOM00010,PR/CO,,,,,BP-ORDTMFC002-0043-R015,신규가입 영업정책 체크
+ZORDMSUB01050,신규가입 상품 서비스임시 저장,1,b110_chk_prod,요금제 사용가능여부 체크,ZORDMS0350010,PR,,,,,BP-ORDTMFC002-0043-R013,신규가입 가능여부 체크

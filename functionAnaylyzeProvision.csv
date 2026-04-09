@@ -1,0 +1,164 @@
+﻿AS-IS PGM,AS-IS PGM명,Depth,AS-IS PGM 함수,AS-IS PGM 함수명,설명,"호출구분
+(PR:접수, CO:개통)","구분1
+(고객유형)","구분2
+(서비스상세)","구분3
+(단말유형)","구분4
+(기타)",L4,L4의 기능
+ZORDMS0100011,신규가입개통처리,0,b100_select_svc_tmp,신규가입 임시정보 조회,신규가입 임시정보 조회 => 주문서 조회CallActivity,CO,,,,[주문서],BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,b202_update_zord_svc_num_rsc_rescrb,철회재가입시 번호자원의 svc_mgmt_num update,zord_svc_num_rsc_u0065,CO,,,,철회후재가입(4),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMS0100011,신규가입개통처리,0,b203_chk_kait_smln,KAIT 단기간 다회선 가입제한 체크,"zordmcus00901
+# 사전체크에 포함되어 있음",CO,,"일반(C1), 선불(C2) air(CB)
+(이용종류 : 01,09,4)",,"번호이동(3), 철회후재가입(4) 제외",X,
+ZORDMS0100011,신규가입개통처리,0,b204_chk_debt_adj,KAIT 신복위채무조정 가입제한 체크,"zordmcus01000
+# 사전체크에 포함되어 있음",CO,,"일반(C1), air(CB)
+(이용종류 : 01,4)",,,X,
+ZORDMS0100011,신규가입개통처리,0,,winback 해지후재가입 처리,"zordms9990900 winback 해지후재가입 갱신 처리
+서비스등급 승계 zordms0100117
+'NA00009504'(Winback_가입) 더미상품 자동가입",CO,,,,,X,winback 삭제될 기능
+ZORDMSUB01020,신규가입 공통 체크,1,b407_call_zordmcus00720,KAIT부정가입방지 이력생성,ZORDMCUS00720,CO,,,,,BP-ORDTMFC002-0043-H020,신규가입 개통
+,신규,,신규,신규,"계약정보 생성 (신규)
+메인/옵션 계약, 계약구성, 계약사용 등 생성",,,,,,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMSUB01130,신규가입 서비스/관계이력,1,"b301_set_svc
+b303_set_cust_cntrct_rel_hst
+b317_set_svc_eqp_rel_hst",신규가입 서비스/관계이력,"서비스정보, 서비스 상태변경  생성
+고객계약관계이력
+서비스단말기관계이력, USIM 존재시 서비스단말기 변경이력",CO,,,,,BP-ORDTMFC002-0043-H022,서비스 및 서비스관계생성
+ZORDMSUB01130,신규가입 서비스/관계이력,1,b745_call_zordms08s5040,법대 연락처 서비스이력생성,법대 연락처 서비스이력생성,CO,,,,,BP-ORDTMFC002-0043-H022,서비스 및 서비스관계생성
+ZORDMSUB01130,신규가입 서비스/관계이력,1,b306_set_acnt,계정생성(계정이력관계),계정생성(계정이력관계) ZORDMACT00202,CO,,,,,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMSUB01130,신규가입 서비스/관계이력,1,b365_set_pafpayscrb,"선후불전환가입시 관계이력생성, 접촉이력생성 공통모듈","선후불전환가입시 관계이력생성, 접촉이력생성 공통모듈
+# [선후불전환가입] 이동",CO,,,,선후불전환가입처리,X,
+ZORDMS0100011,신규가입개통처리,0,b304_set_wlf_dc,복지할인 처리,ZORDMS0800071,CO,,,,복지,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMSUB01140,신규가입 계약서관리,1,"b310_get_cntrct_num_yn
+b305_set_cntrct_num",신규가입 계약서관리,"1. 계약서채번대상 M2M단말기 여부  혹은 일반단말 채번대상
+ZORD_P_CNTRCT_M2M_EQP
+zeqp_eqp_ver_func_s0330
+2. Cat.M1 비대면가입은 제외
+
+ZCIAMMGNS0600, ZORDMS0110052",CO,,"이용종류: 01, 09, 41","M2M단말, 혹은 일반단말",,BP-ORDTMFC002-0043-H023,신규가입 계약서관리
+ZORDMSUB01110,신규가입 Cat. M1 조회/처리,1,b210_get_mgmt_org_id,Cat.M1 단말관리조직 조회,zngm_org_s0177,CO,,Cat.M1(C9),,M2M유형(Cat.M1),BP-ORDTMFC002-0043-H025,신규가입 Cat. M1 처리
+ZORDMSUB01110,신규가입 Cat. M1 조회/처리,1,b310_set_iot_svc_cntc_plc,신규가입 Cat. M1 조회/처리,zordms08s5010 iot연락처 서비스이력생성,CO,,Cat.M1(C9),,M2M유형(Cat.M1),BP-ORDTMFC002-0043-H025,신규가입 Cat. M1 처리
+ZORDMS01S0160,Cat.M1 신규가입 기업용 추가정보 생성,3,b100_set_co_cat_m1_adinfo,Cat.M1 추가정보 생성,Cat.M1 추가정보 생성 ZORD_CO_M2M_ADINFO,CO,,Cat.M1(C9),,M2M유형(Cat.M1),BP-ORDTMFC002-0043-H025,신규가입 Cat. M1 처리
+ZORDMS01S0020,"부가회선(M2M,Cat.M1) 개통처리",2,b100_set_co_m2m_adinfo,"부가회선(M2M,Cat.M1) 개통처리","부가회선(M2M,Cat.M1) 개통처리
+M2M 추가정보 생성 ZORD_CO_M2M_ADINFO",CO,,,M2M,M2M유형(M2M),BP-ORDTMFC002-0043-H024,신규가입 M2M 처리
+ZORDMS0100011,신규가입개통처리,0,b343_set_agn_svc_scrb_rsv,가입예약자료 개통완료처리,"가입예약자료 예약가입 개통완료
+zord_agn_svc_scrb_rsv_u0001
+가입예약완료 => 주문서 처리요청",CO,,,,[주문서],BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,b212_chk_bef_eqp_dc,이전서비스가 단말할인정보를 받고 있는지 여부 확인,"할인지급중이면 단말기할부지원은 무조건승계(Y)
+skt가 고객에게 환불을 한경우 승계(Y), 환불하지 않은 경우 승계(N)",CO,,,,14일내철회후재가입(4)/해지오처리재가입(5),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMS0100011,신규가입개통처리,0,b517_call_zordms0500075,대리점지원금 한도초과 여부 체크,zordms0500075,CO,,,,할부,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,b710_call_zordms0510010,단말기 렌탈 관리,# 미사용,CO,,,,렌탈,X,
+ZORDMS0100011,신규가입개통처리,0,b771_proc_2g_fadeout,2G FadeOut 대상일 경우 체크및 등록,"2G보상(70%할인), 만원할인상품….
+# 미사용",CO,,,,2G FadeOut,X,
+ZORDMSUB01160,신규가입 변경이력생성,1,"b302_set_svc_chg_hst
+b313_set_cust_chg_hst
+b320_set_nn_svc_chg_hst",신규가입 변경이력생성,ZORDMS0100014,CO,,,,,BP-ORDTMFC002-0043-H028,신규가입 변경이력 생성
+ZORDMS0100011,신규가입개통처리,0,b307_set_svc_tmp,서비스임시정보 테이블 수정 (처리완료),,CO,,,,[주문서],,
+ZORDMS0100011,신규가입개통처리,0,"b33a_call_zordms05s0350
+b336_call_zordms05s0340",지원금/할부 처리,"zordms05s0340, zord_allot_obj_eqp_i0003",CO,,,할부/지원금,,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,b337_insert_zord_dsnet_supm_agrmt,유통망지원금약정 생성(추가지원금 존재시),"추가지원금 존재/해지오처리재가입/철회후재가입
+zordms0500046 추가지원금약정 가입처리",CO,,,,"추가지원금 존재, 
+14일내철회후재가입(4)/해지오처리재가입(5)",X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,"b230_call_zordms01s0210
+b501_create_integ_mms_msg","통합MMS 대상인 경우, 통합MMS명세 생성","zordms01s0210, zngmmcap00260,  zord_web_msg_spc_i0001",CO,,,AW 제외,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMS0100011,신규가입개통처리,0,b221_chk_bef_tablet_agrmt,태블릿약정 승계대상여부및 위약금환불여부 체크,"zord_svc_prod_agrmt_s0024
+zinv_svc_inv_spc_s0306",CO,,,,14일내철회후재가입(4)/해지오처리재가입(5),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01090,신규가입 esim 처리,1,"b110_chk_aw_mo_rescrb
+b130_set_svc_rel_hst",애플워치 모회선 철회후 재가입 일 경우 서비스관계이력 생성,"애플워치 모회선 철회후 재가입일 경우
+철회후 재가입 전 자회선과 관계생성",CO,,,,"PRV_OP
+철회후재가입(4)",BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01090,신규가입 esim 처리,1,b210_set_aw_susp_rlse,애플워치 모회선 철회후 재가입시 이용정지 상태 애플워치 정지 해제처리,zordms0700050,CO,,,,"PRV_OP
+철회후재가입(4)",BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMS0100030,신규가입 상품완료 전 체크,2,b100_check_proc,신규가입 상품완료 전 체크,zordms0100030 신규가입 상품완료 전 체크,CO,,,신규가입 상품가입 전 체크,,BP-ORDTMFC002-0043-H029,신규가입 상품가입
+ZORDMS0100011,신규가입개통처리,0,b308_set_prod,요금제완료,"zordms0300010 요금제완료
+zordms0350020 부가요금제/부가서비스완료
+zordms03s0160 무선서비스 할인정보 처리",CO,,,,,BP-ORDTMFC002-0043-H029,신규가입 상품가입
+ZORDMSUB01100,신규가입 상품처리,1,b120_set_best_cust_call_dc,"14일이내철회후재가입(4),오처리해지후재가입(5) 이전서비스의 우량고객 요금할인 승계대상여부체크및 승계처리",우량고객 요금할인 승계모듈,CO,,,,"PRV_OP
+14일내철회후재가입(4)/해지오처리재가입(5)",BP-ORDTMFC002-0043-H029,신규가입 상품가입
+ZORDMSUB01100,신규가입 상품처리,1,b130_set_prod_offering,요금제 오퍼링 모듈 호출,요금제 오퍼링 zordms0390210,CO,개인(01),,,PRV_OP,BP-ORDTMFC002-0043-H029,신규가입 상품가입
+ZORDMS0100011,신규가입개통처리,0,b314_set_eqp,"단말기재고관리, USIM재고관리 처리, KIT 재고관리",ZEQPMCIR00100 ZEQPMCIR00200 ZEQPMCIR00300=> 할부일 경우 해당,CO,,,,,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,"b309_set_np
+b310_update_zord_svc_num_rsc",번호이동완료,"번호이동완료 zordms1200007
+번호용도 update zord_svc_num_rsc_u0032 (01)",CO,,,,번호이동(3),BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,b316_set_autopay,신규계정일 경우만 자동납부 처리,ZAPAMCOM11010,CO,,,,신규 계정,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,b320_set_eqp_allot_rental,"단말기할부 이자기준 저장, 단말기할부원부에 일할계산항목을 UPDATE","단말기할부 이자기준 저장, 단말기할부원부에 일할계산항목을 UPDATE
+zinvmeqps0010 할부개통시 할부일련번호 별 회차별 상세정보 관리",CO,,,,,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,b334_set_m2m,M2M 솔루션 영업승인번호 공통처리,ZORDMS0800400 영업승인번호 관련처리,CO,,,,영업승인번호,BP-ORDTMFC002-0043-H020,신규가입 개통
+ZORDMS0100011,신규가입개통처리,0,b319_set_point,이전 포인트 부활 ,ZMBRMM0000210 이전 포인트 부활 ,CO,,,,14일내철회후재가입(4),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMS0100011,신규가입개통처리,0,b744_recvry_point,이전 레인보우 포인트 부활,ZRBPME0610060 이전 레인보우 포인트 부활,CO,,,,14일내철회후재가입(4),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMS0100013,이동전화신규가입 후 메세지발송,1,b352_send_sms ,안심SMS발송 요청,,CO,,CA 제외,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMS0100011,신규가입개통처리,0,"b357_pltfm_st_chg
+b359_pltfm_mgc_send","공통플랫폼상태변경
+공통플랫폼 처리완료 데이터 MCG로 T-Gate에 전송","ZORDMS0110054
+공통플랫폼 처리완료 데이터 MCG로 T-GATE에 전송 ZORDMS0100082",CO,,,,[주문서],,가입예약완료 => 주문서 처리요청
+ZORDMS0100011,신규가입개통처리,0,b330_set_info_ad_rcv_agree_yn,정보/광고수신동의 거부채널 등록,ZORDMS0810010 개인정보활용 가입 및 해지 모듈,CO,,"이용종류 : 01, 09, 41, 43, 45, 47, 49",,,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,,b125_set_biz,"사업용서비스정보 생성, 사업용서비스,사업용국제전화지원,사업용서비스단말기,사업용 서비스변경이력생성","사업용서비스정보 생성, 사업용서비스,사업용국제전화지원,사업용서비스단말기,사업용 서비스변경이력생성 ZORDMS0800010",CO,,이용종류 : 05,,,BP-ORDTMFC002-0043-H032,사업용가입
+ZORDMS0100011,신규가입개통처리,0,"b353_set_mobile_save
+b362_call_zordms0100301","모바일세이브,T포인트카드 처리","ZORDMS0100301 제휴카드 서비스할인신청/취소 처리모듈 
+# 단말할부/지원금과 관련없는 제휴카드가 있는지?",CO,,,,,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,b670_call_zordms0900110,할부일경우 계약서관련정보 통합생성,ZORDMS0900110,CO,,,,할부,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,b518_call_zordms0500076,프리클럽 관련하여 반영,"ZORDMS0500076 프리클럽 저장처리
+
+# 프리클럽 미사용",CO,,,,14일내철회후재가입(4)/해지오처리재가입(5),X,
+ZORDMS0100011,신규가입개통처리,0,b311_set_ne_interface,이동전화교환기 요청 (NE InterFace),ZORDMS0200200,CO,,,,,BP-ORDTMFC002-0043-I003,개통 인터페이스 송신
+ZORDMS0100011,신규가입개통처리,0,b773_call_zordms0200466,"장애인혜택대상(1,2,3,A,E) URT I/F",ZORDMS0200466,CO,,,,복지,BP-ORDTMFC002-0043-I003,개통 인터페이스 송신
+ZORDMS0100011,신규가입개통처리,0,b315_set_pps,PPS 개통처리,"zeqpmstd00020 PPS 카드상태변경
+zpaymadv00260 PPS신규가입시 초기 충전정보 및 잔액정보를 생성",CO,,선불(C2),,,BP-ORDTMFC002-0043-H030,선불가입
+ZORDMSUB01150,신규가입 로밍,1,"b324_set_acnt_roming
+b318_set_rental",신규가입 로밍,"ZROMMCOM70100 로밍(20,22,23)일 경우 사업자별 계정정보 셋팅
+ZORDMS0700050 이용종류 (21, 24, 25, 26, 27) 일반렌탈일 경우  서비스일시정지 처리",CO,,국제로밍(C4),,,BP-ORDTMFC002-0043-H031,로밍가입
+ZORDMS0100011,신규가입개통처리,0,b511_insert_zord_svc_eqp_acc_allot_dc,할부일경우 서비스별 단말기 ACC할부 할인 테이블생성,ZORD_SVC_EQP_ACC_ALLOT_DC,CO,,,할부,,X,"단말기 할부, 지원금 등록 제외"
+ZORDMS0100011,신규가입개통처리,0,"b338_send_sms_eqp_allot
+b720_call_zordms0510043",단말기ACC 할부등록 서비스 SMS발송,ZORDMS0500043 단말기ACC 할부등록 서비스SMS발송 처리,CO,,,할부,,X,"단말기 할부, 지원금 등록 제외"
+ZORDMSUB01090,신규가입 esim 처리,1,b320_set_aw_acct,철회재가입 모회선의 청구계정에 애플워치 청구서비스 추가,ZORDMACT00202,CO,,,eSIM,"AFT_OP
+14일내철회후재가입(4)",BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01090,신규가입 esim 처리,1,b330_set_rsp_chg_proc,애플워치 RSP연동 모회선정보 현행화,,CO,,,eSIM,"AFT_OP
+14일내철회후재가입(4)",BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01090,신규가입 esim 처리,1,b310_set_rsp_confirm_order,eSIM단말인경우 ConfirmOrder,ZORDMS0100064,CO,,,eSIM,AFT_OP,BP-ORDTMFC002-0043-I003,개통 인터페이스 송신
+ZORDMSUB01100,신규가입 상품처리,1,b140_set_spc_dc,스페셜할인 등록,"ZORDMS0350020 요금제 완료 처리 후 처리해야 함 05:스페셜할인 00:태블릿PC할인요금
+스페셜할인이력에 상태코드 UPDATE ZORD_SVC_SPCL_DC_PAY_HST_U0002",CO,,,,"AFT_OP
+05:스페셜할인",X,"단말기 할부, 지원금 등록 제외"
+ZORDMSUB01100,신규가입 상품처리,1,b150_set_2g_fadeout_dc,2G Fade-Out 보상대상 1만원할인상품 등록,# 미사용,CO,,,,,X,
+ZORDMSUB01120,신규가입 개통 후 처리,1,b110_set_corp_crdt_gr_eval_rslt,법인신용등급평가결과상세 insert, ZORD_CORP_CRDT_GR_EVAL_RSLT_I0002,CO,,,,,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b120_call_zordms9990410,한전원격검침서비스 관리,ZORDMS9990410 원경검침상품(ZORD_P_APT_RMOT_METRD_EPQ)일 경우만 원격검침서비스INSERT,CO,,,,한국전력공사,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMS0100011,신규가입개통처리,0,b366_pps_set_nat_cd,개통 NE I/F 후 내국인의 경우 국적자동변경,ZORDMCUS00017 ,CO,,선불(C2),,,BP-ORDTMFC002-0043-H030,선불가입
+ZORDMSUB01120,신규가입 개통 후 처리,1,b126_set_eqp_st_chg,"회수대상 단말기 등록
+# 불필요 로직인지? ",ZORD_CLCT_OBJ_EQP_I0001,CO,,,,"회수여부 + 
+14일내철회후재가입(4)/해지오처리재가입(5)",BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,"b131_auto_auth
+b132_auto_auth_batch",자동인증처리,"ZNGMMCAP00130 온라인, ZNGMMCAP00200 배치",CO,,,,,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b140_call_zordms0800150,생일스폰서 처리,ZORDMS0800150 기념일등록,CO,,,,,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b150_call_zordms0700230,골드번호 취득,개인 & 신규가입 ZORDMS0700230,CO,개인(01),,,신규가입(1),BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b160_set_zord_svc_m2m_ba,서비스별M2M사업영역 테이블 UPDATE,서비스별M2M사업영역 테이블 UPDATE ZORD_SVC_M2M_BA_U0001,CO,,,"M2M
+Cat.M1",,"BP-ORDTMFC002-0043-H024
+BP-ORDTMFC002-0043-H025","신규가입 M2M 처리
+신규가입 Cat.M1 처리"
+ZORDMSUB01120,신규가입 개통 후 처리,1,b170_set_scrb_rst_except_cust,가입제한예외처리 고객관리 테이블 insert,가입제한예외처리 고객관리 테이블 INSERTZORD_SCRB_RST_EXCEPT_CUST_I0003,CO,,,,,"BP-ORDTMFC002-0043-H024
+BP-ORDTMFC002-0043-H025",신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b210_mms_send_psbl_chk ,MMS발송가능여부 조회,ZEQP_EQP_VER_FUNC_S0063,CO,,,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMSUB01120,신규가입 개통 후 처리,1,b220_mms_sms_msg_send,MMS/SMS Commbuff Get 이후 메세지 전송모듈 호출,zordms0100024,CO,,,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMSUB01120,신규가입 개통 후 처리,1,b230_send_5g_benf_mms,5G 단말 개통 고객 혜택 문자발송,zeqp_eqp_ver_func_s0068 zngmmmsg12610,CO,,,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMSUB01120,신규가입 개통 후 처리,1,b240_send_omd_sms ,OMD 개통 안내메시지 전송,zngmmmsg12310 zordmcomn0050 zordmcomn0060 zeqp_eqp_ver_func_s0005,CO,,,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMSUB01120,신규가입 개통 후 처리,1,b250_send_A40_benf_mms ,A40 단말 개통 고객 혜택 문자발송,zngmmmsg12610,CO,,,,,BP-ORDTMFC002-0043-H035,신규가입 안내 메시지 발송
+ZORDMSUB01120,신규가입 개통 후 처리,1,b299_get_irm ,최종 IRM조회,최종 개통완료 안내메세지 ,CO,,,,,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b310_send_skt2m_mq_put,대리점 영업지원 시스템 신규가입 정보 전송(MQ),zordms9990500,CO,,,,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b320_send_ktoa_mntg,실시간 KTOA 모니터링 송신 모듈 호출,CA 제외 zordms0100950,CO,,,,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b330_send_add_skt2m_mq_put,"무약정이면서 스페셜할인,태블릿PC할인일경우  SKT2M 추가 전송 처리",zordms9990500,CO,,,,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b350_send_scrbr_mgmt,판매점id 입력자료에 한하여 판매채널에 대한 소속가입자관리,zordms0800092,CO,,,,판매조직ID,BP-ORDTMFC002-0043-H033,신규가입 개통 후처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b360_send_pros_regu_convert,단골/가망 전환을 위한 단골고객삭제모듈 호출,"고객유형 개인이면서 일반or PPS 이면서 일반신규가입일때
+zordmcus00180",CO,,,,,BP-ORDTMFC002-0043-H034,신규가입 단골고객관리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b361_call_zordmcus00195,스마트플래너 단골고객등록 '예' 선택한경우 단골고객등록 모듈 호출,"zordms0110052 
+zordmcus00195",CO,,,,,BP-ORDTMFC002-0043-H034,신규가입 단골고객관리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b370_set_prom_obj_suces,철회재가입 시 SKT 30주년 프로모션 대상 승계 처리,zinv_prom_dc_obj_i0001,CO,,,,14일내철회후재가입(4),BP-ORDTMFC002-0043-H027,철회후 재가입 처리
+ZORDMSUB01120,신규가입 개통 후 처리,1,b380_call_zordmcus00019,TID생성동의시 TID연동 모듈 호출,zordmcus00019,CO,,,,TID가입동의,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b390_call_zordmcus00810,KAIT  외국인 출국정보연동 모듈 호출,zordmcus00810,CO,,,,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b400_call_zordmcus00911,KAIT 단기간다회선 가입제한관련 집중전문연동 모듈호출,zordmcus00911,CO,,"일반(C1), 선불(C2) air(CB)
+(이용종류 : 01,09,4)",,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b410_call_zordms05s0083,KAIT동일명의 집중전문 송신을 위한 업무처리연동 모듈호출,zordms05s0083,CO,,"일반(C1), 선불(C2) air(CB), 일반사업용(C8)",,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,b420_call_zordmcus01200,KAIT신복위채무조정 가입제한관련 집중전문연동 모듈호출,zordmcus01200,CO,,"일반(C1), air(CB)
+(이용종류 : 01,4)",일반이동전화C1,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01120,신규가입 개통 후 처리,1,"b421_call_zordms0700050
+b422_call_send_sp_mms",법인고객 KAIT동일명의 명의불일치시 정지모듈 호출,"KAIT동일명의 조회결과 명의불일치일 경우 호출
+zordms0700050 (F3/64)
+
+정지안내MMS 발송 zngmmmsg12610",CO,법인(02),"일반(C1), 선불(C2), 일반사업용(C8)",DS단말,,BP-ORDTMFC002-0043-I004,개통 후 인터페이스 송신
+ZORDMSUB01050,신규가입 상품 서비스임시 저장,1,b140_update_zord_svc_tmp,요금제 임시정보 수정 (처리완료),zord_svc_tmp_u0025 (I1),CO,,,,[주문서],BP-ORDTMFC002-0043-H029,신규가입 상품가입

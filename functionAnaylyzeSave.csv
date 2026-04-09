@@ -1,0 +1,57 @@
+﻿AS-IS PGM,AS-IS PGM명,Depth,AS-IS PGM 함수,AS-IS PGM 함수명,설명,"호출구분
+(PR:접수, CO:개통)","구분1
+(고객유형)","구분2
+(서비스상세)","구분3
+(단말유형)","구분4
+(기타)",L4,L4의 기능
+ZORDMS0100033,신규가입 휴일예약처리 모듈,1,b400_save_hday_rsv_scrb,신규가입 휴일예약처리,신규가입 휴일예약,PR,,,,휴일/원샷,신규가입 휴일원샷예약 저장 / BP-ORDTMFC002-0043-H002-0002,휴일예약 L4로
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b207_set_eqp,단말기예약상태 변경,zeqp_eqp_orgl_book_u0004 => CallActivity,PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,10. 단말기예약상태 변경
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b203_set_grtinsu_eqpallot - b221_insert_grtinsu_fee,요금보증보험_서비스별 보증보험원부 생성,"보험관리번호채번 zordmutl00010, 보증보험원부 생성 zord_svc_grt_insu_orgl_book",PR,,선불(C2) 제외,,보증보험(1),신규가입접수 / BP-ORDTMFC002-0043-H010,11. 신규가입 요금 보증보험 등록
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b224_put_grtinsu_if,보증보험사전송,ZORDMCOM10040,PR,,,,보증보험(1),신규가입접수 / BP-ORDTMFC002-0043-H010,13. 보증보험사 전송
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b230_call_zpaymurp00010,결산관리일보반영처리,"보증보험결과 정상, 수납금액X 경우
+ZPAYMURP00010 (개통까지 진행되는 모듈)
+=> NOVA에서도 호출?",PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,14. 가입일시금수납환불
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b202_set_cntrct_svc_mgmt_num,"서비스관리번호, 계약관리번호 채번",zordmutl00010,PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,2. 관리번호 채번
+ZORDMSUB01080,신규가입 esim 조회,1,b202_set_cntrct_svc_mgmt_num,AW 비대면 번호예약건은 서비스관리번호 조회,svc_mgmt_num_pr,PR,,,eSIM,,신규가입접수 / BP-ORDTMFC002-0043-H010,2. 관리번호 채번
+ZORDMS01S0150,Cat.M1 신규가입 임시정보생성,2,b260_call_zordms01s0010,Cat.M1사업영역 생성,"zordms0500610 cat_m1단말체크
+zord_svc_m2m_ba_i0001",PR,,,Cat.M1,,신규가입접수 / BP-ORDTMFC002-0043-H010,3. 신규가입 M2M사업영역 저장
+ZORDMS01S0010,"부가회선(M2M,Cat.M1) 임시정보 생성",1,b260_call_zordms01s0010,m2m사업영역 생성,zordms0500600 m2m단말체크 및 서비스별 m2m사업영역 생성,PR,,,M2M,,신규가입접수 / BP-ORDTMFC002-0043-H010,3. 신규가입 M2M사업영역 저장
+ZORDMSUB01110,신규가입 Cat. M1 조회/처리,1,b260_call_zordms01s0010,"Cat.M1 선납여부, 샐프개통여부 조회",zord_prod_grp_dtl_s0049,,,,Cat.M1,,신규가입접수 / BP-ORDTMFC002-0043-H010,3. 신규가입 M2M사업영역 저장
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b211_set_acnt,청구정보 자동생성,"사업용(포켓파이렌탈제외), pps, 로밍(20~27), Cat.M1 선납일 경우
+zordmact00101",PR,,"선불(C2), 국제로밍(C4), 이용종류(05(사업용)), Cat.M1(C9)",Cat.M1선납,청구정보,신규가입접수 / BP-ORDTMFC002-0043-H010,4. 신규가입 청구정보 등록
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b211_chk_acnt,신규가입청구정보생성체크,"청구정보 자동생성 대상이 아닌 경우
+zordmacts0020",PR,,"일반(C1, 사업용제외)Cat.M1(C9)",Cat.M1선납 제외,청구정보,신규가입접수 / BP-ORDTMFC002-0043-H010,4. 신규가입 청구정보 등록
+ZORDMSUB01010,신규가입 창구즉납요청,1,"SUB_DLCALL_TRY (""zordmsub01010"", ZORDMCOM06010_IN_IO_ZORDMS0100015, itf);   PFM_TRY( b900_get_sd(itf) );",신규가입 창구즉납요청,"요금보증보험, 할부금, 번호이동, PPS 가상카드, Cat. M1 창구즉납
+zordms03s0500
+zordmcom10042",PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,5. 신규가입 창구즉납요청
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b216_call_zordms0500040,USIM 카드 후불신청,zordms0500040,PR,,,USIM후불,다회선가입(02)제외,신규가입접수 / BP-ORDTMFC002-0043-H010,6. USIM 카드 후불신청
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b217_set_usim_lpay_for_mline,다회선가입일 경우 usim후불 처리,"다회선가입은 임시정보 생성후 USIM카드 후불신청. zordms0500040
+임시정보(OP_CTT197):USIM카드 후청구금액 UPDATE",PR,,,USIM후불,다회선가입(02),신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b241_psninf_pagr_if_log_insert,개인정보 동의내용 존재시만 동의항목 로그테이블에 저장,zord_psninf_pagr_if_log_i0001,PR,,,,동의정보 생성(휴대폰요금상담),신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMSUB01090,신규가입 esim 처리,1,"SUB_DLCALL_TRY (""zordmsub01090"", ZORDMCOM06010_IN_IO_ZORDMS0100015, itf);   PFM_TRY( b900_get_sd(itf) )","애플워치 모회선 철회후재가입 T원넘버_공유II(모) 부가상품 및 추가정보 자동 setting
+자회선 프로파일 다운로드 상태일 경우 모회선 LTE Watch_활성화 상품 자동 setting",구조체에만 셋팅,PR,철회후재가입,,AW,AW모회선,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMSUB01050,신규가입 상품 서비스임시 저장,1,"SUB_DLCALL_TRY (""zordmsub01050"", ZORDMCOM06010_IN_IO_ZORDMS0100015, itf);   PFM_TRY( b900_get_sd(itf) );",신규가입 상품 서비스임시 저장,"수납금 발생 or 할부가입(자체할부X)
+zord_svc_tmp_i0013, zord_svc_tmp_u0025",PR,주문서생성,,,요금제,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMSUB01060,신규가입 상품임시 저장,1,"SUB_DLCALL_TRY (""zordmsub01060"", ZORDMCOM06010_IN_IO_ZORDMS0100015, itf);   PFM_TRY( b900_get_sd(itf) );",요금제정보 상품임시테이블에 저장 처리,"zord_prod_scrb_tmp, zord_prod_scrb_dtl_tmp, zord_add_prod_scrb_dtl_tmp_i0001
+
+zordms03s0340 신규가입시 부가서비스추가정보 UPDATE",PR,주문서생성,,,요금제,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b201_set_svctmp,서비스임시정보 생성,,PR,CallActivity,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS01S0071,B2C가입접수처리상태변경,1,b304_set_b2c_scrb_rcv_svc,B2C가입접수처리상태변경,,PR,CallActivity,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS01S0072,B2C가입접수변경처리,1,b305_set_b2c_scrb_rcv,B2C가입접수변경처리,,PR,CallActivity,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b240_pltfm_st_chg ,공통플랫폼 상태변경,ZORDMS0110054 (05:임시저장),PR,CallActivity,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+zfinmcom04090,과세구분획득,1,zfinmcom04090,고객과세구분코드 조회,고객과세구분코드 조회,PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,7. 주문서 저장
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b204_set_svc_num,"번호 갱신, 서비스번호이력 생성",,PR,,,,,신규가입접수 / BP-ORDTMFC002-0043-H010,8. 번호정보 예약
+ZORDMSUB01090,신규가입 esim 처리,1,"SUB_DLCALL_TRY (""zordmsub01090"", ZORDMCOM06010_IN_IO_ZORDMS0100015, itf);   PFM_TRY( b900_get_sd(itf) )","애플워치, 차량용eSIM일 경우 모/자서비스관계이력 생성하는 기능",RSP연동방식구분코드:02 Call Forking방식이고 eSIM구분코드가 AW/CA일 경우 모/자서비스관계이력 생성,PR/CO,,,"AW, CA",,신규가입접수 / BP-ORDTMFC002-0043-H010,9. 신규가입 서비스관계이력 생성
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b206_set_svc_rel_hst,서비스관계이력 생성,,PR,,,,철회후재가입,신규가입접수 / BP-ORDTMFC002-0043-H010,9. 신규가입 서비스관계이력 생성
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b210_set_allot_info,"채권회사코드, 자체할부여부 조회",,PR,,,,할부,,"12. 단말기 할부, 지원금 등록 제외"
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b210_set_allot_info - b218_set_eq_insu_a1_yn,할부 보증보험 실시간 가입여부 조회,공통플랫폼 신청자료중 Tgate or 스마트플래너 신청자료,PR,,,,할부,,"12. 단말기 할부, 지원금 등록 제외"
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b210_set_allot_info - b252_call_zordms0500057,영업장별 단말할부 상한금액 조회,zordms0500057,PR,,,,할부,,"12. 단말기 할부, 지원금 등록 제외"
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b253_call_zordms0500075,대리점지원금 한도초과 여부 체크,"zordms0500075
+할부, 기본약정, 지원금약정, 클럽T",PR,,,,할부/지원,,"12. 단말기 할부, 지원금 등록 제외"
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b222_insert_grtinsu_allot,단말 할부 보증보험 가입,"zord_svc_grt_insu_orgl_book , 단말할부  생성 zord_svc_eqp_acc_allot zord_svc_eqp_alt_bond_orbk",PR,선불X,,,할부,,"12. 단말기 할부, 지원금 등록 제외"
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b215_get_wb_ltrm_dc_strd_dt,winback 해지후재가입일 경우 장기할인기준일자 추출,"winback 해지후재가입 적용시 해지서비스의 장기할인기준일자 추출및 계산
+zordms9990900",PR,CallActivity,"철회후/해지오처리후재가입/선후불X
+특수이용종류, 일반이동전화(C1) 대상",,,,winback 삭제될 기능
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b212_set_bar_cd_num - b900_bar_cd_num_auto_cre,계약서번호 자동생성,,,,,,,,개통으로
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b209_chk_insu_interface,보증보험 I/F 처리 결과 확인,,,,,,,,개통으로
+ZORDMS0100015,이동전화 서비스 임시정보 생성,0,b223_insert_grtinsu_rental,렌탈보증보험 생성,,,,,,,,렌탈 미사용업무로 삭제

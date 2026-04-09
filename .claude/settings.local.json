@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3:*)",
+      "Bash(python:*)",
+      "Bash(cmd /c \"mkdir D:\\\\projects\\\\pocPattern\\\\backend\\\\routers && mkdir D:\\\\projects\\\\pocPattern\\\\backend\\\\services && mkdir D:\\\\projects\\\\pocPattern\\\\backend\\\\data && mkdir D:\\\\projects\\\\pocPattern\\\\frontend\\\\css && mkdir D:\\\\projects\\\\pocPattern\\\\frontend\\\\js\")"
+    ]
+  }
+}
