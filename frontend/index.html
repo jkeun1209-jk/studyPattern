@@ -15,10 +15,10 @@
     <!-- ── 사이드바 ── -->
     <aside class="sidebar">
       <div class="sidebar-brand">
-        <div class="brand-icon">GoF</div>
+        <div class="brand-icon">DP</div>
         <div>
           <div class="brand-title">디자인 패턴</div>
-          <div class="brand-sub">Java Spring Boot</div>
+          <div class="brand-sub">GoF 23 + DDD 10</div>
         </div>
       </div>
 
@@ -38,6 +38,19 @@
       <div id="patternList" class="pattern-list">
         <!-- JS로 채워짐 -->
       </div>
+
+      <!-- ── MD 다운로드 패널 (체크박스 선택 시 표시) ── -->
+      <div id="downloadPanel" class="download-panel" style="display:none">
+        <div class="dl-panel-header">
+          <span class="dl-panel-title">📥 MD 다운로드</span>
+          <span id="dlSelectedCount" class="dl-count-badge">0</span>
+        </div>
+        <div id="dlSelectedList" class="dl-selected-list"></div>
+        <div class="dl-panel-actions">
+          <button id="btnClearDl" class="btn-dl-clear">전체 해제</button>
+          <button id="btnDownloadMd" class="btn-dl-download">다운로드 ↓</button>
+        </div>
+      </div>
     </aside>
 
     <!-- ── 메인 콘텐츠 ── -->
@@ -47,19 +60,19 @@
       <div id="welcomeView" class="view welcome-view">
         <div class="welcome-glyph">◈</div>
         <h2>패턴을 선택하거나 검색하세요</h2>
-        <p>GoF 23개 디자인 패턴의 Java Spring Boot 예제를 확인할 수 있습니다.</p>
+        <p>GoF 23개 + DDD 10개 디자인 패턴의 Java Spring Boot 예제를 확인할 수 있습니다.</p>
         <div class="welcome-info">
           <div class="info-item">
             <span class="info-icon">📦</span>
-            <span>GoF 23개 패턴 예제가 사전 탑재되어 즉시 확인할 수 있습니다</span>
+            <span>GoF 23 + DDD 10개 패턴 예제가 사전 탑재되어 즉시 확인할 수 있습니다</span>
           </div>
           <div class="info-item">
             <span class="info-icon">🏗️</span>
             <span>contract / application / domain / infra / presentation 레이어 기반</span>
           </div>
           <div class="info-item">
-            <span class="info-icon">☕</span>
-            <span>Java Spring Boot 실무 중심 예제 코드</span>
+            <span class="info-icon">📥</span>
+            <span>원하는 패턴을 선택하여 마크다운 파일로 다운로드할 수 있습니다</span>
           </div>
         </div>
       </div>

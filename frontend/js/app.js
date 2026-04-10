@@ -19,6 +19,7 @@ const CATEGORY_BADGE_CLASS = {
 
 let allPatterns = {};
 let selectedPattern = null;
+const selectedForDownload = new Set(); // 다운로드 선택된 패턴명 집합
 
 // ── 초기화 ──────────────────────────────────────────────
 window.addEventListener('DOMContentLoaded', () => {
@@ -33,6 +34,19 @@ window.addEventListener('DOMContentLoaded', () => {
   // 전체화면 버튼 리스너 (정적 DOM에 한 번만 등록)
   document.getElementById('btnFsCopy').addEventListener('click', copyFullscreenCode);
   document.getElementById('btnFsClose').addEventListener('click', closeFullscreen);
+  document.getElementById('btnClearDl').addEventListener('click', clearDownloadSelection);
+  document.getElementById('btnDownloadMd').addEventListener('click', downloadSelectedPatterns);
+
+  // 다운로드 패널 태그 제거 — 이벤트 위임
+  document.getElementById('dlSelectedList').addEventListener('click', (e) => {
+    const btn = e.target.closest('.dl-tag-remove');
+    if (!btn) return;
+    const name = btn.dataset.name;
+    selectedForDownload.delete(name);
+    const cb = document.querySelector(`.pattern-select-cb[data-name="${CSS.escape(name)}"]`);
+    if (cb) cb.checked = false;
+    updateDownloadPanel();
+  });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') closeFullscreen();
   });
@@ -83,10 +97,22 @@ function renderPatternList(patterns) {
       item.className = 'pattern-item';
       item.dataset.name = p.name;
       item.innerHTML = `
+        <label class="pattern-dl-label" title="MD 다운로드 목록에 추가">
+          <input type="checkbox" class="pattern-select-cb"
+                 data-name="${escHtml(p.name)}" data-ko="${escHtml(p.name_ko)}" data-cat="${cat}">
+          <span class="pattern-dl-box"></span>
+        </label>
         <span class="pattern-name-en">${p.name}</span>
         <span class="pattern-name-ko">${p.name_ko}</span>
         ${p.available ? '<span class="cached-dot" title="예제 탑재됨"></span>' : ''}
       `;
+      // 체크박스 클릭 시 패턴 선택으로 전파 차단
+      item.querySelector('.pattern-dl-label').addEventListener('click', (e) => e.stopPropagation());
+      item.querySelector('.pattern-select-cb').addEventListener('change', (e) => {
+        if (e.target.checked) selectedForDownload.add(p.name);
+        else                   selectedForDownload.delete(p.name);
+        updateDownloadPanel();
+      });
       item.addEventListener('click', () => selectPattern(p.name));
       group.appendChild(item);
     });
@@ -335,6 +361,108 @@ function showView(name) {
   document.getElementById('welcomeView').style.display = name === 'welcome' ? '' : 'none';
   document.getElementById('loadingView').style.display = name === 'loading' ? '' : 'none';
   document.getElementById('resultView').style.display  = name === 'result'  ? '' : 'none';
+}
+
+// ── 다운로드 패널 업데이트 ───────────────────────────────
+function updateDownloadPanel() {
+  const panel    = document.getElementById('downloadPanel');
+  const countEl  = document.getElementById('dlSelectedCount');
+  const listEl   = document.getElementById('dlSelectedList');
+
+  if (selectedForDownload.size === 0) {
+    panel.style.display = 'none';
+    return;
+  }
+
+  panel.style.display = '';
+  countEl.textContent = selectedForDownload.size;
+
+  listEl.innerHTML = Array.from(selectedForDownload).map((name) => {
+    const cb = document.querySelector(`.pattern-select-cb[data-name="${CSS.escape(name)}"]`);
+    const ko = cb ? cb.dataset.ko : '';
+    return `<span class="dl-tag">${escHtml(ko || name)}<button class="dl-tag-remove" data-name="${escHtml(name)}" title="제거">×</button></span>`;
+  }).join('');
+}
+
+// ── 다운로드 선택 전체 해제 ──────────────────────────────
+function clearDownloadSelection() {
+  selectedForDownload.clear();
+  document.querySelectorAll('.pattern-select-cb').forEach((cb) => (cb.checked = false));
+  updateDownloadPanel();
+}
+
+// ── MD 다운로드 실행 ─────────────────────────────────────
+async function downloadSelectedPatterns() {
+  if (selectedForDownload.size === 0) return;
+
+  const btn = document.getElementById('btnDownloadMd');
+  btn.disabled  = true;
+  btn.textContent = '생성 중...';
+
+  try {
+    const patterns = [];
+    for (const name of selectedForDownload) {
+      const res = await fetch(API.example, {
+        method:  'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body:    JSON.stringify({ pattern_name: name }),
+      });
+      if (res.ok) patterns.push(await res.json());
+    }
+
+    const date = new Date().toISOString().slice(0, 10);
+    triggerDownload(buildMarkdown(patterns), `design-patterns-${date}.md`);
+  } finally {
+    btn.disabled    = false;
+    btn.textContent = '다운로드 ↓';
+  }
+}
+
+// ── 마크다운 생성 ────────────────────────────────────────
+function buildMarkdown(patterns) {
+  const CAT_KO = {
+    creational: '생성 패턴 (Creational)',
+    structural: '구조 패턴 (Structural)',
+    behavioral: '행동 패턴 (Behavioral)',
+    ddd:        'DDD 패턴',
+  };
+  const today = new Date().toLocaleDateString('ko-KR');
+
+  let md = `# 디자인 패턴 예제 모음\n\n`;
+  md += `> 생성일: ${today} | 총 ${patterns.length}개 패턴\n\n`;
+  md += `---\n\n`;
+
+  for (const p of patterns) {
+    const catKo = CAT_KO[p.category] || p.category;
+
+    md += `## ${p.pattern_name} — ${catKo}\n\n`;
+    md += `### 01. 패턴 개요\n\n${p.overview}\n\n`;
+    md += `### 02. Spring Boot 활용 시나리오\n\n${p.use_case}\n\n`;
+    md += `### 03. 패키지 구조\n\n\`\`\`\n${p.package_structure}\n\`\`\`\n\n`;
+    md += `### 04. 핵심 이점\n\n${p.key_benefits.map((b) => `- ${b}`).join('\n')}\n\n`;
+
+    if (Array.isArray(p.flow_description) && p.flow_description.length) {
+      md += `### 05. 코드 흐름\n\n${p.flow_description.map((s, i) => `${i + 1}. ${s}`).join('\n')}\n\n`;
+    }
+
+    md += `### 06. 예제 코드\n\n\`\`\`java\n${p.example_code}\n\`\`\`\n\n`;
+    md += `---\n\n`;
+  }
+
+  return md;
+}
+
+// ── 파일 다운로드 트리거 ─────────────────────────────────
+function triggerDownload(content, filename) {
+  const blob = new Blob(['\ufeff' + content], { type: 'text/markdown;charset=utf-8' });
+  const url  = URL.createObjectURL(blob);
+  const a    = document.createElement('a');
+  a.href     = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
 }
 
 // ── Util ─────────────────────────────────────────────────

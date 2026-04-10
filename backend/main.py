@@ -4,7 +4,7 @@ from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from routers import patterns
+from routers import patterns, export
 
 
 def _get_frontend_dir() -> Path:
@@ -28,6 +28,7 @@ app.add_middleware(
 )
 
 app.include_router(patterns.router, prefix="/api")
+app.include_router(export.router,   prefix="/api/export")
 app.mount("/static", StaticFiles(directory=FRONTEND_DIR), name="static")
 
 

@@ -179,7 +179,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 7px 16px 7px 32px;
+  padding: 7px 16px 7px 10px;
   cursor: pointer;
   color: var(--sidebar-text);
   font-size: 13px;
@@ -187,6 +187,38 @@ body {
   transition: background .1s, color .1s;
   gap: 6px;
 }
+
+/* 체크박스 (MD 다운로드 선택) */
+.pattern-dl-label {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+  padding: 2px;
+}
+.pattern-dl-label input[type="checkbox"] { display: none; }
+.pattern-dl-box {
+  width: 14px; height: 14px;
+  border: 1.5px solid #2d3748;
+  border-radius: 3px;
+  background: transparent;
+  transition: all .15s;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.pattern-dl-label input:checked + .pattern-dl-box {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+.pattern-dl-label input:checked + .pattern-dl-box::after {
+  content: '';
+  width: 8px; height: 5px;
+  border-left: 2px solid #fff;
+  border-bottom: 2px solid #fff;
+  transform: rotate(-45deg) translateY(-1px);
+  display: block;
+}
+.pattern-item:hover .pattern-dl-box { border-color: #4a5568; }
 .pattern-item:hover {
   background: var(--sidebar-hover);
   color: #fff;
@@ -209,6 +241,95 @@ body {
   flex-shrink: 0;
   opacity: .8;
 }
+
+/* ── MD 다운로드 패널 ── */
+.download-panel {
+  border-top: 1px solid #1e2130;
+  padding: 12px;
+  background: #0a0d14;
+  flex-shrink: 0;
+}
+.dl-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.dl-panel-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #a0aec0;
+}
+.dl-count-badge {
+  background: var(--accent);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 700;
+  padding: 1px 7px;
+  border-radius: 10px;
+  min-width: 20px;
+  text-align: center;
+}
+.dl-selected-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  margin-bottom: 8px;
+  max-height: 72px;
+  overflow-y: auto;
+}
+.dl-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #1e2130;
+  color: #a0aec0;
+  font-size: 11px;
+  padding: 2px 6px 2px 8px;
+  border-radius: 10px;
+  white-space: nowrap;
+}
+.dl-tag-remove {
+  background: none;
+  border: none;
+  color: #4a5568;
+  cursor: pointer;
+  font-size: 13px;
+  line-height: 1;
+  padding: 0;
+  transition: color .1s;
+}
+.dl-tag-remove:hover { color: #e53e3e; }
+.dl-panel-actions {
+  display: flex;
+  gap: 6px;
+}
+.btn-dl-clear {
+  flex: 1;
+  background: transparent;
+  border: 1px solid #2d3748;
+  color: #718096;
+  border-radius: var(--radius);
+  padding: 6px 0;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all .15s;
+}
+.btn-dl-clear:hover { border-color: #4a5568; color: #a0aec0; }
+.btn-dl-download {
+  flex: 2;
+  background: var(--accent);
+  border: none;
+  color: #fff;
+  border-radius: var(--radius);
+  padding: 6px 0;
+  font-size: 12px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background .15s;
+}
+.btn-dl-download:hover    { background: #4338ca; }
+.btn-dl-download:disabled { background: #2d3748; cursor: not-allowed; }
 
 /* ── Main ── */
 .main {
