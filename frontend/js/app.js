@@ -7,12 +7,14 @@ const CATEGORY_LABEL = {
   creational: '생성 패턴 (Creational)',
   structural: '구조 패턴 (Structural)',
   behavioral: '행동 패턴 (Behavioral)',
+  ddd:        'DDD 패턴',
 };
 
 const CATEGORY_BADGE_CLASS = {
   creational: 'badge-creational',
   structural: 'badge-structural',
   behavioral: 'badge-behavioral',
+  ddd:        'badge-ddd',
 };
 
 let allPatterns = {};
@@ -171,7 +173,7 @@ async function selectPattern(patternName) {
 // ── 결과 렌더링 ─────────────────────────────────────────
 function renderResult(data) {
   const catClass = CATEGORY_BADGE_CLASS[data.category] || '';
-  const catLabel = { creational: 'Creational', structural: 'Structural', behavioral: 'Behavioral' }[data.category] || data.category;
+  const catLabel = { creational: 'Creational', structural: 'Structural', behavioral: 'Behavioral', ddd: 'DDD' }[data.category] || data.category;
 
   const layersHtml = Array.isArray(data.layers_used) && data.layers_used.length
     ? `<div class="layers-wrap">

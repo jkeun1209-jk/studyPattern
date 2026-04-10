@@ -23,6 +23,7 @@
   --cat-creational:   #3b82f6;
   --cat-structural:   #10b981;
   --cat-behavioral:   #f59e0b;
+  --cat-ddd:          #8b5cf6;
 
   --badge-cached-bg:  #d1fae5;
   --badge-cached-fg:  #065f46;
@@ -164,6 +165,7 @@ body {
 .cat-dot.creational   { background: var(--cat-creational); }
 .cat-dot.structural   { background: var(--cat-structural); }
 .cat-dot.behavioral   { background: var(--cat-behavioral); }
+.cat-dot.ddd          { background: var(--cat-ddd); }
 
 .category-count {
   font-size: 10px;
@@ -309,6 +311,7 @@ body {
 .badge-creational { background: #dbeafe; color: #1e40af; }
 .badge-structural  { background: #d1fae5; color: #065f46; }
 .badge-behavioral  { background: #fef3c7; color: #92400e; }
+.badge-ddd         { background: #ede9fe; color: #5b21b6; }
 .badge-cached { background: var(--badge-cached-bg); color: var(--badge-cached-fg); }
 .badge-ai     { background: var(--badge-ai-bg);     color: var(--badge-ai-fg); }
 

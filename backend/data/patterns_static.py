@@ -4126,23 +4126,16 @@ import java.util.Optional;
 public interface OrderQueryRepository extends JpaRepository<com.example.cqrs.domain.Order, Long> {
 
     // JPQL: Customer JOIN하여 customerName 포함, itemCount 집계
-    @Query("""
-        SELECT new com.example.cqrs.contract.OrderSummaryDto(
-            o.id, c.name, o.status, o.totalAmount, SIZE(o.items), o.orderedAt
-        )
-        FROM Order o JOIN Customer c ON o.customerId = c.id
-        WHERE o.customerId = :customerId
-        ORDER BY o.orderedAt DESC
-        """)
+    @Query("SELECT new com.example.cqrs.contract.OrderSummaryDto(" +
+           "o.id, c.name, o.status, o.totalAmount, SIZE(o.items), o.orderedAt) " +
+           "FROM Order o JOIN Customer c ON o.customerId = c.id " +
+           "WHERE o.customerId = :customerId ORDER BY o.orderedAt DESC")
     List<OrderSummaryDto> findOrderSummariesByCustomerId(String customerId);
 
-    @Query("""
-        SELECT new com.example.cqrs.contract.OrderSummaryDto(
-            o.id, c.name, o.status, o.totalAmount, SIZE(o.items), o.orderedAt
-        )
-        FROM Order o JOIN Customer c ON o.customerId = c.id
-        WHERE o.id = :orderId
-        """)
+    @Query("SELECT new com.example.cqrs.contract.OrderSummaryDto(" +
+           "o.id, c.name, o.status, o.totalAmount, SIZE(o.items), o.orderedAt) " +
+           "FROM Order o JOIN Customer c ON o.customerId = c.id " +
+           "WHERE o.id = :orderId")
     Optional<OrderSummaryDto> findOrderSummaryById(Long orderId);
 }
 

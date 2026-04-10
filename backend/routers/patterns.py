@@ -34,6 +34,18 @@ GOF_PATTERNS = {
         {"name": "Template Method",         "name_ko": "템플릿 메서드"},
         {"name": "Visitor",                 "name_ko": "비지터"},
     ],
+    "ddd": [
+        {"name": "Aggregate Root",   "name_ko": "애그리거트 루트"},
+        {"name": "Value Object",     "name_ko": "값 객체"},
+        {"name": "Domain Event",     "name_ko": "도메인 이벤트"},
+        {"name": "Repository",       "name_ko": "리포지토리"},
+        {"name": "Domain Service",   "name_ko": "도메인 서비스"},
+        {"name": "Application Service", "name_ko": "애플리케이션 서비스"},
+        {"name": "Specification",    "name_ko": "스펙"},
+        {"name": "CQRS",             "name_ko": "CQRS"},
+        {"name": "Event Sourcing",   "name_ko": "이벤트 소싱"},
+        {"name": "Saga",             "name_ko": "사가"},
+    ],
 }
 
 _ALL_PATTERN_NAMES = {
@@ -49,7 +61,7 @@ class ExampleRequest(BaseModel):
 
 @router.get("/patterns")
 async def get_patterns():
-    """GoF 23개 패턴 목록 반환 (사전 탑재 여부 포함)"""
+    """GoF 23개 + DDD 10개 패턴 목록 반환 (사전 탑재 여부 포함)"""
     result = {}
     for cat, patterns in GOF_PATTERNS.items():
         result[cat] = [
@@ -70,7 +82,7 @@ async def get_pattern_example(request: ExampleRequest):
     if pattern_name not in _ALL_PATTERN_NAMES:
         raise HTTPException(
             status_code=404,
-            detail=f"패턴 '{pattern_name}'을 찾을 수 없습니다. GoF 23개 패턴만 지원합니다.",
+            detail=f"패턴 '{pattern_name}'을 찾을 수 없습니다. GoF 23개 + DDD 10개 패턴만 지원합니다.",
         )
 
     data = PATTERNS_DATA.get(pattern_name)
